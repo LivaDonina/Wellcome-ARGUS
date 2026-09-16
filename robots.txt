@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://livadonina.github.io/sitemap.xml
+Sitemap: https://livadonina.github.io/Wellcome-ARGUS/sitemap.xml
