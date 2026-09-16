@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://Liva-Donina.github.io/sitemap.xml
+Sitemap: https://LivaDonina.github.io/sitemap.xml
