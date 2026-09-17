@@ -2,7 +2,7 @@
 layout: profiles
 permalink: /people/
 title: team
-description: members of the lab or group
+description: Imperial, KCL & TU Delft interdisciplinary team
 nav: true
 nav_order: 2
 
