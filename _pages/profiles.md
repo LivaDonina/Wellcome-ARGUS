@@ -7,22 +7,16 @@ nav: true
 nav_order: 2
 
 profiles:
-  # if you want to include more than one profile, just replicate the following block
-  # and create one content file for each profile inside _pages/
-  - align: right
-    image: prof_pic.jpg
-    content: about_einstein.md
-    image_circular: false # crops the image to make it circular
-    more_info: >
-      <p>555 your office number</p>
-      <p>123 your address street</p>
-      <p>Your City, State 12345</p>
-  - align: left
-    image: prof_pic.jpg
-    content: about_einstein.md
-    image_circular: false # crops the image to make it circular
-    more_info: >
-      <p>555 your office number</p>
-      <p>123 your address street</p>
-      <p>Your City, State 12345</p>
+  - name: Albert Einstein
+    image: einstein.jpg
+    description: PhD student, TU Delft — works on relativistic sensor networks.
+  - name: Marie Curie
+    image: curie.jpg
+    description: Postdoc, Imperial — radiochemistry and materials science.
+  - name: Alan Turing
+    image: turing.jpg
+    description: Lecturer, KCL — computation and cryptography.
+  - name: Ada Lovelace
+    image: lovelace.jpg
+    description: PhD student, Imperial — algorithms and mathematical modelling.
 ---
