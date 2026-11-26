@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 1 June 2026
+date: 2026-06-01
 inline: true
 related_posts: false
 ---
-Wellcome project begins! 
 
+Wellcome project begins!

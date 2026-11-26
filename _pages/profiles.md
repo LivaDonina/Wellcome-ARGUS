@@ -1,10 +1,10 @@
 ---
 layout: profiles
 permalink: /people/
-title: team
-description: Imperial, KCL & TU Delft interdisciplinary team
+title: Team
+description: Imperial · KCL · TU Delft — interdisciplinary team
 nav: true
-nav_order: 2
+nav_order: 1
 
 # One block per entry, shown in this order. `content` is a Markdown file in
 # _pages/team/ holding the name, link and bio. `image` is a file name in assets/img/.
