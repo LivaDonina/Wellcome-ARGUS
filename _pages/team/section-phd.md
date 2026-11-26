@@ -1,2 +1,1 @@
-## PhD Students
-{: .section-label data-num="03"}
+<h2 class="section-label" data-num="03">PhD Students</h2>

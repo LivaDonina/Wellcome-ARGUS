@@ -15,4 +15,3 @@ nav_order: 2
   include bib_search.liquid, then a div with class="publications" that holds
   the bibliography tag (each wrapped in Liquid braces).
 -->
-
