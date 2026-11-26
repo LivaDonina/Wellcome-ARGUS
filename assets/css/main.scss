@@ -1,0 +1,262 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+/* Built-in Sass modules you’ll likely use across partials */
+@use "sass:math";
+@use "sass:string";
+
+/* Configure your design tokens BEFORE loading any of your partials.
+   Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default:  "930px" }}
+);
+
+/* Your project partials — convert these files to `@use "variables";`
+   (or `@use "variables" as *;`) inside each file and qualify variables if needed. */
+@use "themes";
+@use "layout";
+
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
+
+/* -------------------------------------------------------------------------
+   ARGUS site colour overrides.
+   This file is a local copy of al_folio_core's assets/css/main.scss with the
+   block below added. Change colours here; light mode uses :root, dark mode
+   uses html[data-theme="dark"]. Variable names are in al_folio_core's
+   _sass/_themes.scss (e.g. --global-text-color, --global-theme-color).
+   ------------------------------------------------------------------------- */
+/* Light mode: use the same blue as dark mode (#2698ba) instead of pink. */
+:root {
+  --global-theme-color: #2698ba;
+  --global-hover-color: #2698ba;
+  --global-code-bg-color: rgba(38, 152, 186, 0.05);
+}
+
+html[data-theme="dark"] {
+  --global-bg-color: #111184;
+}
+
+/* Fonts: Geist for text and headings, Geist Mono for small details
+   (news dates, page descriptions, captions, code).
+   Loaded from Google Fonts (see google_fonts in _config.yml).
+   To switch fonts, change the link in _config.yml and the font names below:
+   IBM Plex -> "IBM Plex Sans" / "IBM Plex Mono";
+   Space Grotesk + Inter -> body "Inter", headings "Space Grotesk", no mono block. */
+body {
+  font-family: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.post-title,
+.navbar-brand,
+.nav-link {
+  font-family: "Geist", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.news th,
+.post-description,
+.post-meta,
+.caption,
+code,
+pre {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+/* -------------------------------------------------------------------------
+   ARGUS "technical" look: top bar, menu, titles, captions, section labels.
+   Delete this block to go back to the theme's default look.
+   ------------------------------------------------------------------------- */
+$mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+/* 5. Top bar: slimmer, fine bottom line, see-through with blur */
+.navbar {
+  opacity: 1;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  background-color: color-mix(in srgb, var(--global-bg-color) 82%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* 1. Site title: short, bold, with a blue dot */
+.navbar.navbar-light .navbar-brand.title {
+  font-weight: 700 !important;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+
+  &::after {
+    content: ".";
+    color: var(--global-theme-color);
+  }
+}
+
+/* 4. Menu: mono, uppercase, spaced; current page underlined in blue */
+.navbar.navbar-light .navbar-nav .nav-item .nav-link {
+  font-family: $mono;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.navbar.navbar-light .navbar-nav .nav-item.active > .nav-link {
+  font-weight: 500;
+}
+
+@media (min-width: 576px) {
+  .navbar.navbar-light .navbar-nav .nav-item .nav-link {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .navbar.navbar-light .navbar-nav .nav-item.active > .nav-link {
+    text-decoration: underline;
+    text-decoration-color: var(--global-theme-color);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.5em;
+  }
+}
+
+/* 4. Phone dropdown: full-width rows, dividers, blue bar on current page */
+@media (max-width: 575.98px) {
+  .navbar .navbar-collapse-main .navbar-menu-list > .nav-item {
+    width: 100%;
+    border-top: 1px solid var(--global-divider-color);
+  }
+
+  .navbar.navbar-light .navbar-nav .nav-item .nav-link {
+    padding: 0.85rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .navbar.navbar-light .navbar-nav .nav-item.active > .nav-link {
+    box-shadow: inset 3px 0 0 var(--global-theme-color);
+  }
+
+  /* Dark-mode switch row: match the other rows */
+  .navbar .navbar-collapse-main .navbar-menu-list > .toggle-container {
+    width: 100%;
+    border-top: 1px solid var(--global-divider-color);
+    padding: 0.6rem 0.75rem;
+  }
+
+  /* Solid background while the menu is open, so the page doesn't show through */
+  .navbar:has(.navbar-collapse-main.show),
+  .navbar:has(.navbar-collapse-main.collapsing) {
+    background-color: var(--global-bg-color);
+  }
+}
+
+/* 2. Page titles: bolder and tighter, with a short blue accent line above */
+.post-header::before {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  margin-bottom: 1rem;
+  background-color: var(--global-theme-color);
+}
+
+.post-title {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .post-title {
+    font-size: 3rem;
+  }
+}
+
+/* 2. Captions under titles: small mono uppercase label */
+.post-description,
+.post-header .desc {
+  font-family: $mono;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--global-text-color-light);
+  margin-top: 0.75rem;
+}
+
+/* 3. Team page section headings: "01 — PIs & Co-Is" mono label with a rule */
+h2.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: $mono;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 2.5rem 0 0.5rem;
+
+  &::before {
+    content: attr(data-num) " —";
+    color: var(--global-theme-color);
+  }
+
+  &::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--global-divider-color);
+  }
+}
+
+/* Hide the theme's separator line directly above a section heading */
+article > hr:has(+ .profile + .clearfix .section-label) {
+  display: none;
+}
+
+/* 3. Names on the team page: smaller and semi-bold */
+article h3 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* News dates: keep on one line (the mono font is wider) */
+.news th {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  padding-right: 1rem;
+}
+
+/* Home page "news" heading: same mono label style as the team sections */
+article > h2:has(> a[href$="/news/"]) {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: $mono;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 2.5rem 0 0.75rem;
+
+  &::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--global-divider-color);
+  }
+}
